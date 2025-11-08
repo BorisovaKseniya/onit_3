@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .register-container {
+            background: white;
+            width: 100%;
+            max-width: 400px;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 400;
+            font-size: 24px;
+            color: #222;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4285f4;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+
+        .register-btn:hover {
+            background-color: #3367d6;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+            color: #777;
+        }
+
+        .divider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #eee;
+            z-index: 1;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: transparent;
+            color: #4285f4;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .login-btn:hover {
+            background-color: #f8f9fa;
+        }
+
+        .terms {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .terms a {
+            color: #4285f4;
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        .password-requirements {
+            font-size: 12px;
+            color: #777;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="register-container">
+    <h1>Создать аккаунт</h1>
+
+    <form id="registerForm">
+        <div class="form-group">
+            <input type="email" id="email" placeholder="Email" required>
+        </div>
+
+        <div class="form-group">
+            <input type="password" id="password" placeholder="Пароль" required>
+            <div class="password-requirements">Минимум 8 символов, включая цифры и буквы</div>
+        </div>
+
+        <div class="form-group">
+            <input type="password" id="confirmPassword" placeholder="Повторите пароль" required>
+        </div>
+
+        <button type="submit" class="register-btn">Зарегистрироваться</button>
+    </form>
+
+    <div class="terms">
+        Нажимая "Зарегистрироваться", вы соглашаетесь с <a href="#">условиями использования</a> и <a href="#">политикой конфиденциальности</a>
+    </div>
+
+    <div class="divider">
+        <span>Уже есть аккаунт?</span>
+    </div>
+
+    <button class="login-btn" id="loginBtn">Войти</button>
+</div>
+
+<script>
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        // Простая валидация
+        if (!email || !password || !confirmPassword) {
+            alert('Пожалуйста, заполните все поля');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            alert('Пароли не совпадают');
+            return;
+        }
+
+        if (password.length < 8) {
+            alert('Пароль должен содержать минимум 8 символов');
+            return;
+        }
+
+        // В реальном приложении здесь был бы запрос к серверу
+        fetch('/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email: email,        // username = email
+                password: password,
+            })
+        })
+            .then(async response => {
+                if (response.ok) {
+                    alert('Регистрация прошла успешно!');
+                    // редирект на страницу логина
+                    window.location.href = '/login.html';
+                } else {
+                    const errorText = await response.text();
+                    alert('Ошибка регистрации: ' + errorText);
+
+                }
+            })
+            .catch(err => {
+                console.error('Ошибка запроса:', err);
+                alert('Произошла ошибка. Попробуйте позже.');
+            });
+    });
+
+    document.getElementById('loginBtn').addEventListener('click', function() {
+       window.location.href = '/login.html';
+    });
+</script>
+</body>
+</html>
