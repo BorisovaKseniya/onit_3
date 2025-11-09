@@ -6,16 +6,23 @@ import stnk.onit.numo.entity.User;
 import stnk.onit.numo.service.UserService;
 
 import java.util.Map;
+import stnk.onit.numo.util.JwtUtil;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class UserController {
 
     private final UserService userService;
+    private final JwtUtil jwtUtil; // добавляем
 
-    public UserController(UserService userService) {
+    // Конструктор Spring автоматически внедрит зависимости
+    public UserController(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
+        this.jwtUtil = jwtUtil;
     }
+
+
 
   /*  @PostMapping("/register")
     public ResponseEntity<String> register(
@@ -45,9 +52,12 @@ public class UserController {
         String password = body.get("password");
 
         User user = userService.login(email, password);
+
+        String token = jwtUtil.generateToken(user.getEmail());
         // Возвращаем успешный ответ (пока просто ОК)
         return ResponseEntity.ok(Map.of(
                 "message", "Успешный вход",
+                "token", token,
                 "email", user.getEmail()
         ));
     }

@@ -46,6 +46,7 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Неверный пароль");
         }
 
+
         // 3. Если всё ок — возвращаем пользователя
         return user;
     }
