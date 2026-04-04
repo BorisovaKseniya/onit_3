@@ -23,17 +23,19 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User register(String email, String rawPassword, Integer currencyId) {
+    public User register(String firstName,String secondName,String email, String rawPassword, Integer currencyId) {
         Currency currency = currencyRepository.findById(currencyId)
                 .orElseThrow(() -> new IllegalArgumentException("Unknown currency ID"));
 
         if(userRepository.existsUserByEmail(email)){
             throw new RuntimeException("User already exists");
         }
-        User user = new User();
-        user.setEmail(email);
-        user.setPassword(passwordEncoder.encode(rawPassword));
-        user.setDefaultCurrency(currency);
+        User user = User.builder()
+                .firstName(firstName)
+                .secondName(secondName)
+                .email(email)
+                .password(passwordEncoder.encode(rawPassword))
+                .defaultCurrency(currency).build();
         return userRepository.save(user);
     }
     public User login(String email, String rawPassword) {

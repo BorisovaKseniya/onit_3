@@ -1,5 +1,4 @@
 package stnk.onit.numo.entity;
-
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -12,15 +12,16 @@ const Register = () => {
     };
 
     // Запрос к сереверу для регистрации
-    const register = async (email, password,confirmPassword) => {
-        console.log("Логин:", email, password,confirmPassword);
+    const register = async (firstName, secondName, email, password, confirmPassword) => {
+        console.log("Логин:", email, password,confirmPassword,firstName, secondName);
 
         // Простая валидация
-        if (!email || !password || !confirmPassword) {
+        if (!email || !password || !confirmPassword || !firstName || !secondName) {
             alert('Пожалуйста, заполните все поля');
             return;
         }
 
+        console.log("Пароли ", password, " ", confirmPassword);
         if (password !== confirmPassword) {
             alert('Пароли не совпадают');
             return;
@@ -36,6 +37,8 @@ const Register = () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
+                firstName: firstName,
+                secondName: secondName,
                 email: email,
                 password: password,
             })
@@ -62,21 +65,31 @@ const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const formElements = e.target.elements; // HTMLFormControlsCollection
+        const firstName = formElements.firstName.value;
+        const secondName = formElements.secondName.value;
         const email = formElements.email.value;
         const password = formElements.password.value;
         const confirmPassword = formElements.confirmPassword.value;
-        register(email, password, confirmPassword);
+        register(firstName,secondName,email, password, confirmPassword);
     };
 
 
     return (
         <div className="register-container">
             <h1>Создать аккаунт</h1>
-
             <form id="registerForm" onSubmit={handleSubmit}>
+
+                <div className="form-group">
+                    <input type="text" id="firstName" name="firstName" placeholder="Имя" required/>
+                </div>
+                <div className="form-group">
+                    <input type="text" id="secondName" name="secondName" placeholder="Фамилия" required/>
+                </div>
+
                 <div className="form-group">
                     <input type="email" id="email" placeholder="Email" required/>
                 </div>
+
 
                 <div className="form-group">
                     <input type="password" id="password" placeholder="Пароль" required/>
@@ -87,7 +100,7 @@ const Register = () => {
                     <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Повторите пароль" required/>
                 </div>
 
-                <button type="submit" className="register-btn">Зарегистрироваться</button>
+                <button type="submit" className="register-btn">Зарегистрироваться </button>
             </form>
 
             <div className="terms">
@@ -103,5 +116,4 @@ const Register = () => {
         </div>
     )
 }
-
 export default Register;

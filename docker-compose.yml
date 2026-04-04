@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  # БАЗА ДАННЫХ
+  database:
+    image: postgres:15-alpine
+    container_name: myapp_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - app_network
+
+  # БЕКЕНД (Spring Boot)
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile_backend
+
+    container_name: NUMO_backend
+    restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      DB_HOST: database
+      DB_PORT: 5432
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      SPRING_PORT: ${SPRING_PORT}
+    ports:
+      - "${SPRING_PORT}:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - app_network
+
+  # ФРОНТЕНД (React)
+  frontend:
+    build:
+      context: ./numo-app
+      dockerfile: Dockerfile_frontend
+    container_name: NUMO_frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "${REACT_PORT}:80"
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  app_network:
+    driver: bridge

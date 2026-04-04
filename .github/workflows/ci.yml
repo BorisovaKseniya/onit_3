@@ -1,0 +1,29 @@
+name: ci.yml
+on:
+  push:
+    branches: [ "main" ]
+    pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_NAME: ${{ secrets.DB_NAME }}
+      SPRING_PORT: ${{ secrets.SPRING_PORT }}
+      REACT_PORT: ${{ secrets.REACT_PORT }}
+
+    steps:
+      - name: Клонируем репозиторий
+        uses: actions/checkout@v3
+
+      - name: Устанавливаем Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Сборка и тесты
+        run: mvn clean test

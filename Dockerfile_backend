@@ -1,0 +1,33 @@
+# СТЕЙДЖ 1: сборка
+FROM maven:3.8.4-openjdk-17-slim AS builder
+
+WORKDIR /app
+
+COPY pom.xml .
+RUN mvn dependency:go-offline
+
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# СТЕЙДЖ 2: запуск
+FROM eclipse-temurin:17-jdk
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+RUN addgroup --system --gid 1001 appgroup && \
+    adduser --system --uid 1001 --gid 1001 appuser
+
+COPY --from=builder /app/target/*.jar app.jar
+
+RUN chown -R appuser:appgroup /app
+
+USER appuser
+
+EXPOSE 8080
+
+HEALTHCHECK --interval=10s --timeout=5s --retries=5 \
+  CMD curl -f http://localhost:8080 || exit 1
+
+CMD ["java", "-jar", "app.jar"]

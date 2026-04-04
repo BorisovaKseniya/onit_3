@@ -1,0 +1,505 @@
+/* Стили для страницы профиля */
+
+/* Заголовок */
+.profile-header {
+    margin-bottom: 30px;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.page-subtitle {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Карточка профиля */
+.profile-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.profile-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #4285f4 ;
+}
+
+.profile-card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+}
+
+.edit-profile-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.edit-profile-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Просмотр информации */
+.profile-info-view {
+    padding: 24px;
+}
+
+.profile-info-item {
+    display: flex;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.profile-info-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.info-label {
+    flex: 0 0 150px;
+    font-weight: 500;
+    color: #666;
+    font-size: 14px;
+}
+
+.info-value {
+    flex: 1;
+    color: #333;
+    font-size: 16px;
+}
+
+/* Форма профиля */
+.profile-form {
+    padding: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+    font-size: 14px;
+}
+
+.form-group label::after {
+    content: " *";
+    color: #ea4335;
+    opacity: 0.8;
+}
+
+.form-group label[for="secondName"]::after,
+.form-group label[for="currentPassword"]::after,
+.form-group label[for="newPassword"]::after,
+.form-group label[for="confirmPassword"]::after {
+    content: "";
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: all 0.2s;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #4285f4;
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+.form-group input::placeholder {
+    color: #999;
+}
+
+.error-message {
+    display: block;
+    color: #ea4335;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.password-hint {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* Переключатель пароля */
+.password-toggle {
+    margin: 24px 0;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.password-toggle-btn {
+    background: none;
+    border: none;
+    color: #4285f4;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.password-toggle-btn:hover {
+    color: #3367d6;
+    text-decoration: underline;
+}
+
+.password-toggle-btn.active {
+    color: #ea4335;
+}
+
+/* Секция смены пароля */
+.password-change-section {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Действия формы */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.save-btn {
+    background: #4285f4;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    min-width: 150px;
+}
+
+.save-btn:hover:not(:disabled) {
+    background: #3367d6;
+}
+
+.save-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.cancel-btn {
+    background: white;
+    color: #666;
+    border: 1px solid #ddd;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+    min-width: 100px;
+}
+
+.cancel-btn:hover:not(:disabled) {
+    background: #f8f9fa;
+    border-color: #999;
+}
+
+/* Карточка действий */
+.actions-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.actions-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.actions-list {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+    text-align: left;
+    background: white;
+    color: #333;
+    border: 1px solid #e0e0e0;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.action-icon {
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.action-text {
+    flex: 1;
+    font-weight: 500;
+}
+
+.logout-btn:hover {
+    background: #f8f9fa;
+    border-color: #4285f4;
+    color: #4285f4;
+}
+
+.export-btn:hover {
+    background: #f8f9fa;
+    border-color: #34a853;
+    color: #34a853;
+}
+
+.delete-btn {
+    color: #ea4335;
+}
+
+.delete-btn:hover {
+    background: #fce8e6;
+    border-color: #ea4335;
+    color: #ea4335;
+}
+
+/* Карточка статистики */
+.stats-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.stats-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    padding: 24px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.stat-number {
+    display: block;
+    font-size: 32px;
+    font-weight: 700;
+    color: #4285f4;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    display: block;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Сообщения */
+.message-alert {
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    position: relative;
+    animation: slideIn 0.3s ease;
+}
+
+.message-alert.success {
+    background: #e6f4ea;
+    color: #137333;
+    border: 1px solid #34a853;
+}
+
+.message-alert.error {
+    background: #fce8e6;
+    color: #c5221f;
+    border: 1px solid #ea4335;
+}
+
+.message-alert.info {
+    background: #e8f0fe;
+    color: #1967d2;
+    border: 1px solid #4285f4;
+}
+
+.message-alert.warning {
+    background: #fef7e0;
+    color: #e37400;
+    border: 1px solid #fbbc05;
+}
+
+.close-alert {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.7;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-alert:hover {
+    opacity: 1;
+}
+
+/* Анимации */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .profile-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .edit-profile-btn {
+        align-self: flex-start;
+    }
+
+    .profile-info-item {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .info-label {
+        flex: none;
+        font-size: 12px;
+    }
+
+    .info-value {
+        font-size: 14px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .save-btn,
+    .cancel-btn {
+        width: 100%;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .action-btn {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-form,
+    .profile-info-view,
+    .actions-list,
+    .stats-grid {
+        padding: 16px;
+    }
+
+    .profile-card-header {
+        padding: 16px;
+    }
+
+    .form-group input {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+}

@@ -35,11 +35,13 @@ public class UserController {
     }*/
   @PostMapping("/register")
   public ResponseEntity<String> register(@RequestBody Map<String, String> body) {
+      String firstName = body.get("firstName");
+      String secondName = body.get("secondName");
       String email = body.get("email");
       String password = body.get("password");
       Integer currencyId = 1;
       try {
-          userService.register(email, password, currencyId);
+          userService.register(firstName,secondName,email, password, currencyId);
       } catch (Exception e) {
           e.printStackTrace(); // для отладки
           return ResponseEntity.status(500).body("Ошибка при регистрации: " + e.getMessage());
@@ -53,12 +55,11 @@ public class UserController {
 
         User user = userService.login(email, password);
 
-        String token = jwtUtil.generateToken(user.getEmail());
+        String token = jwtUtil.generateToken(user);
         // Возвращаем успешный ответ (пока просто ОК)
         return ResponseEntity.ok(Map.of(
                 "message", "Успешный вход",
-                "token", token,
-                "email", user.getEmail()
+                "token", token
         ));
     }
 

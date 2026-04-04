@@ -1,0 +1,414 @@
+/* Стили для управления категориями */
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.add-category-btn {
+    background: #34a853;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.2s;
+}
+
+.add-category-btn:hover {
+    background: #2d9248;
+}
+
+.categories-management {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.categories-section h3 {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    color: #333;
+    border-bottom: 2px solid #4285f4;
+    padding-bottom: 4px;
+}
+
+.categories-section:last-child h3 {
+    border-bottom-color: #34a853;
+}
+
+.categories-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 3px solid #4285f4;
+}
+
+.categories-section:last-child .category-item {
+    border-left-color: #34a853;
+}
+
+.category-name {
+    font-weight: 500;
+    color: #333;
+}
+
+.delete-category-btn {
+    background: #ea4335;
+    color: white;
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.delete-category-btn:hover {
+    background: #d33426;
+}
+
+.category-type-display {
+    padding: 12px 15px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Модальные окна */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: white;
+    border-radius: 8px;
+    padding: 0;
+    max-width: 400px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.modal .profile-form {
+    padding: 24px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
+
+.primary-btn {
+    background: #4285f4;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.primary-btn:hover {
+    background: #3367d6;
+}
+
+.secondary-btn {
+    background: white;
+    color: #4285f4;
+    border: 1px solid #4285f4;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.secondary-btn:hover {
+    background: #f8f9fa;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .categories-management {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+    }
+
+    .category-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    /* Стили для фильтров и сортировки */
+    .controls-header {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .filter-toggle-btn {
+        background: #4285f4;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.2s;
+    }
+
+    .filter-toggle-btn:hover {
+        background: #3367d6;
+    }
+
+    .filter-toggle-btn.active {
+        background: #3367d6;
+    }
+
+    .reset-filters-btn {
+        background: #f8f9fa;
+        color: #666;
+        border: 1px solid #ddd;
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.2s;
+    }
+
+    .reset-filters-btn:hover:not(:disabled) {
+        background: #e8f0fe;
+        color: #4285f4;
+        border-color: #4285f4;
+    }
+
+    .reset-filters-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .filters-panel {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid #e0e0e0;
+    }
+
+    .filters-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+    }
+
+    .results-count {
+        font-size: 14px;
+        color: #666;
+        margin-left: 8px;
+        font-weight: normal;
+    }
+
+    /* Статистика */
+    .operations-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-card {
+        background: white;
+        padding: 16px;
+        border-radius: 8px;
+        border-left: 4px solid #4285f4;
+        text-align: center;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-card.income {
+        border-left-color: #34a853;
+    }
+
+    .stat-card.expense {
+        border-left-color: #ea4335;
+    }
+
+    .stat-card.balance.positive {
+        border-left-color: #34a853;
+    }
+
+    .stat-card.balance.negative {
+        border-left-color: #ea4335;
+    }
+
+    .stat-label {
+        display: block;
+        font-size: 12px;
+        color: #666;
+        margin-bottom: 4px;
+    }
+
+    .stat-value {
+        display: block;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .stat-card.income .stat-value {
+        color: #34a853;
+    }
+
+    .stat-card.expense .stat-value {
+        color: #ea4335;
+    }
+
+    .stat-card.balance.positive .stat-value {
+        color: #34a853;
+    }
+
+    .stat-card.balance.negative .stat-value {
+        color: #ea4335;
+    }
+
+    /* Сортировка */
+    .sorting-panel {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+    .sort-label {
+        font-size: 14px;
+        color: #666;
+        margin-right: 8px;
+    }
+
+    .sort-btn {
+        background: white;
+        color: #666;
+        border: 1px solid #ddd;
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.2s;
+    }
+
+    .sort-btn:hover {
+        background: #f8f9fa;
+        border-color: #4285f4;
+        color: #4285f4;
+    }
+
+    .sort-btn.active {
+        background: #4285f4;
+        color: white;
+        border-color: #4285f4;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+        .filters-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .controls-header {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 8px;
+        }
+
+        .sorting-panel {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .sort-label {
+            margin-bottom: 8px;
+        }
+
+        .operations-stats {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .filters-panel {
+            padding: 12px;
+        }
+
+        .stat-card {
+            padding: 12px;
+        }
+    }
+}

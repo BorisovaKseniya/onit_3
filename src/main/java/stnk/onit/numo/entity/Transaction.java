@@ -6,36 +6,38 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Entity
-@Table(name = "obj_users")
+@Table(name = "obj_transactions")
 @Data                 // Генерирует геттеры, сеттеры, toString, equals/hashCode
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-public class User {
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String email;
+    @Column(nullable = false)
+    private String type;
 
     @Column(nullable = false)
-    private String password;
+    private Float amount;
 
-    @ManyToOne
-    @JoinColumn(name = "default_currency_code", nullable = false)
+    @Column(nullable = false)
+    private String category;
 
-    private Currency defaultCurrency;
+    @Column(nullable = true)
+    private String description;
 
-    @Column(name = "first_name")
-    private String firstName;
+    @Column(nullable = false)
+    private Date date;
 
-    @Column(name = "second_name")
-    private String secondName;
-
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
 
 
 }
-

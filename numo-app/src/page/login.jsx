@@ -49,10 +49,6 @@ const Login = () => {
         login(email, password);
     };
 
-
-
-
-
     return (
         <div className="login-container">
         <h1>Вход</h1>
@@ -61,7 +57,6 @@ const Login = () => {
                 <div className="form-group">
                     <input type="email" id="email" placeholder="Email" required/>
                 </div>
-
                 <div className="form-group">
                     <input type="password" id="password" placeholder="Пароль" required/>
                 </div>
