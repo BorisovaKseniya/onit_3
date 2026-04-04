@@ -1,8 +1,12 @@
 name: ci.yml
+
 on:
   push:
-    branches: [ "main" ]
-    pull_request:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
@@ -16,14 +20,14 @@ jobs:
       REACT_PORT: ${{ secrets.REACT_PORT }}
 
     steps:
-      - name: Клонируем репозиторий
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Устанавливаем Java
+      - name: Set up Java
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Сборка и тесты
+      - name: Build and run tests
         run: mvn clean test
