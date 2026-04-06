@@ -20,7 +20,7 @@ jobs:
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U ${{ secrets.DB_USER }}"
+          --health-cmd "pg_isready -U $POSTGRES_USER"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -30,7 +30,7 @@ jobs:
       DB_PORT: 5432
       DB_USER: ${{ secrets.DB_USER }}
       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-      DB_NAME: ${{ secrets.DB_NAME }
+      DB_NAME: ${{ secrets.DB_NAME }}
       SPRING_PORT: 8080
 
     steps:
