@@ -37,7 +37,6 @@ class AuthControllerTest {
         userRepository.deleteAll();
 
         Currency currency = new Currency();
-        currency.setId(1);
         currency.setName("rub");
         currency.setSymbol("USD");
         currencyRepository.save(currency);
