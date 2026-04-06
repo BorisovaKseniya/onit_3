@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
+import stnk.onit.numo.entity.Currency;
 import stnk.onit.numo.entity.User;
 import stnk.onit.numo.repository.UserRepository;
 
@@ -32,10 +33,15 @@ class AuthControllerTest {
     void setUp() {
         userRepository.deleteAll();
 
+        Currency currency = new Currency();
+        currency.setId(1);
+        currency.setName("rub");
+        currency.setSymbol("USD");
         User user = new User();
         user.setEmail("testuser@t");
         user.setFirstName("Test name");
         user.setSecondName("Test surname");
+        user.setDefaultCurrency(currency);
         user.setPassword(passwordEncoder.encode("12345"));
         userRepository.save(user);
     }
