@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import stnk.onit.numo.entity.Currency;
 import stnk.onit.numo.entity.User;
+import stnk.onit.numo.repository.CurrencyRepository;
 import stnk.onit.numo.repository.UserRepository;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -28,6 +29,8 @@ class AuthControllerTest {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private CurrencyRepository currencyRepository;
 
     @BeforeEach
     void setUp() {
@@ -37,6 +40,7 @@ class AuthControllerTest {
         currency.setId(1);
         currency.setName("rub");
         currency.setSymbol("USD");
+        currencyRepository.save(currency);
         User user = new User();
         user.setEmail("testuser@t");
         user.setFirstName("Test name");
